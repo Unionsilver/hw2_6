@@ -2,7 +2,8 @@ import java.util.*;
 
 public class Main {
     private static final List<Integer> nums = new ArrayList<>(List.of(1, 1, 2, 3, 4, 4, 5, 5, 6, 7));
-    private static final List<String> words = new ArrayList<> (List.of("я", "я", "ты", "мы", "они"));
+    private static final List<String> words = new ArrayList<>(List.of("я", "я", "ты", "мы", "они"));
+
 
     public static void main(String[] args) {
 
@@ -26,12 +27,12 @@ public class Main {
     }
 
     public static void task2() {
-        for (int i = 0; i < nums.size() - 1; i++) {
-            if (nums.get(i) % 2 != 1) {
-                if (nums.get(i).equals(nums.get(i + 1))) {
-                    nums.remove(i);
-                }
+        Collections.sort(nums);
+        int max = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums.get(i) % 2 != 1 && nums.get(i) != max) {
                 System.out.print(nums.get(i));
+                max = nums.get(i);
             }
         }
     }
@@ -43,12 +44,15 @@ public class Main {
 
 
     public static void task4() {
-        Map<String,Integer> getNum = new HashMap<>();
-        for (int i = 0; i < words.size(); i++) {
-            getNum.put(words.get(i),Collections.frequency(words, words.get(i)));
+        HashMap<String, Integer> words1 = new HashMap<>();
+        for (String word : words) {
+            if (words1.containsKey(word)) {
+                words1.put(word, words1.get(word) + 1);
+            } else {
+                words1.put(word, 0);
+            }
         }
-        System.out.println(getNum);
-
+        System.out.println(words1);
     }
 }
 
